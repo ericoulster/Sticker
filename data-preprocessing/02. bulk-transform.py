@@ -5,7 +5,7 @@ calendar = pd.read_csv('datetime_index.csv').drop(columns='Index')
 
 calendar = calendar.rename(columns={'Dates':'Date'})
 
-# going from the 50's onward
+# going from the 70's onward
 calendar = calendar[25567:]
 
 p = Path('D:\Documents\Datasets\Stock Data\Stocks').glob('*.txt')
