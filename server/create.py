@@ -48,7 +48,7 @@ if __name__ == '__main__':
     table = create_table()
 
     # Wait until the table exists.
-    table.meta.client.get_waiter('table_exists').wait(TableName='users')
+    #table.meta.client.get_waiter('table_exists').wait(TableName='users')
 
     # Print out some data about the table.
     print("Table status:", table.table_status)

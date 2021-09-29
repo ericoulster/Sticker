@@ -2,7 +2,7 @@ from decimal import Decimal
 import json
 import boto3
 import logging
-from decimal import Decimal
+import decimal
 
 ## importing the load_dotenv from the python-dotenv module
 from dotenv import load_dotenv
@@ -12,7 +12,6 @@ from pathlib import Path
 import os
  
 logging.basicConfig(level=20, datefmt='%I:%M:%S', format='[%(asctime)s] %(message)s')
-
 
 load_dotenv()
 env_path = Path('.')/'.env'
@@ -38,6 +37,7 @@ if __name__ == '__main__':
     #    tickers_list = json.load(json_file, parse_float=Decimal)
     #load_tickers(tickers_list)
 
+    # Multiple import 
     rootdir = './data/'
 
     data = {}
@@ -45,28 +45,34 @@ if __name__ == '__main__':
     for subdir, dirss, files in os.walk(rootdir):
         for dir in dirss:
 
-            #print(dir)
-            data = []
+            print(dir)
+            primary = []
 
             for subdir, dirs, files in os.walk(rootdir + dir):
                 #print(subdir)
-                print(files)
+                #print(files)
+                count = 0
+
+                secondary = []
                 for file in files:
                     #print(os.path.splitext(file)[0])
-                    header = os.path.splitext(file)[0]
+                    filename = os.path.splitext(file)[0]
+                    #print(filename)
+                    
+                    count += 1
+                    print(count)
                     with open(subdir + "/" + file) as json_file:
-                        json_read = json.loads(json_file.read(), parse_float=Decimal)
+                        json_read = json.loads(json_file.read(), parse_float=decimal.Decimal)
                         #print(json_read)
-                        data.append({"ticker":dir, header:json_read})
-                        
-                #print(data)
+                        secondary.append({filename:json_read})
+
+                    primary.append({"ticker":dir, "data":secondary})
+                #print(primary)
                 
                 #tickers_list = json.dumps(data)
-                load_tickers(data)
+                load_tickers(primary)
                     
 
-
-    #print(tickers)
 
 # https://www.mikulskibartosz.name/batch-write-dynamodb-boto3/
 # https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStarted.Python.02.html
