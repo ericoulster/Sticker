@@ -5,6 +5,10 @@ stocklist.csv
 
 node_modules
 
+gh-pages
+gh-pages.pub
+gh-pages*
+
 *.env
 
 # Logs
