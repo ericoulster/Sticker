@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style></style>
+<script src="sample-data.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.4.2.min.js"></script>
+<body>
+
+    <div id="test" style="width:800px;height:400px;"></div>
+
+<script>
+test = document.getElementById("test");
+var trace1 = {
+    x: Object.keys(ticker1.price),
+    y: Object.values(ticker1.price),
+    name: ticker1.ticker_name,
+    type: "scatter",
+    mode: "lines",
+    line: {color: "188ACA"}
+}
+
+var trace2 = {
+    x: Object.keys(ticker2.price),
+    y: Object.values(ticker2.price),
+    name: ticker2.ticker_name,
+    type: "scatter",
+    mode: "lines",
+    line : {color: "E8B023"}
+}
+
+data = [trace1, trace2]
+
+var layout = {title:"Example Graph"}
+
+Plotly.newPlot("test", data, layout)
+
+</script>
+</div>
+</body>
